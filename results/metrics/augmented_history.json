@@ -1,0 +1,107 @@
+{
+  "run_name": "augmented",
+  "classes": [
+    "Tomato___Bacterial_spot",
+    "Tomato___Early_blight",
+    "Tomato___Late_blight",
+    "Tomato___Leaf_Mold",
+    "Tomato___Septoria_leaf_spot",
+    "Tomato___Spider_mites Two-spotted_spider_mite",
+    "Tomato___Target_Spot",
+    "Tomato___Tomato_Yellow_Leaf_Curl_Virus",
+    "Tomato___Tomato_mosaic_virus",
+    "Tomato___healthy"
+  ],
+  "config": {
+    "seed": 42,
+    "data": {
+      "dataset_path": "data/raw/PlantVillage",
+      "class_prefix": "Tomato___",
+      "split_file": "data/processed/split.json",
+      "processed_path": "data/processed",
+      "train_frac": 0.7,
+      "val_frac": 0.15,
+      "test_frac": 0.15,
+      "image_size": 224,
+      "num_classes": 10,
+      "augmentation": true
+    },
+    "model": {
+      "name": "resnet18",
+      "pretrained": true,
+      "checkpoint_path": "models/checkpoints/best.pt"
+    },
+    "train": {
+      "batch_size": 32,
+      "learning_rate": 0.001,
+      "epochs": 10,
+      "optimizer": "adam",
+      "num_workers": 2
+    },
+    "device": "auto"
+  },
+  "device": "mps",
+  "best_val_acc": 0.9860396767083027,
+  "history": {
+    "train_loss": [
+      0.3967317524641034,
+      0.18832733988212874,
+      0.14273802465532656,
+      0.13126111977122615,
+      0.12159787816567565,
+      0.11247506744102631,
+      0.08691325646472754,
+      0.07781097836941457,
+      0.07815435574830067,
+      0.07152016599589428
+    ],
+    "train_acc": [
+      0.867973547472839,
+      0.9371752479924421,
+      0.9526846165958117,
+      0.9552826326562746,
+      0.956935915603842,
+      0.9620532199653598,
+      0.9697685403873406,
+      0.9744922059518186,
+      0.9758305778617541,
+      0.9753582113053062
+    ],
+    "val_loss": [
+      0.2798608890416417,
+      0.1960057678750821,
+      0.10324104750549631,
+      0.09946201634740431,
+      0.1588367144947151,
+      0.09963294532229408,
+      0.059726765543005336,
+      0.07740773803460042,
+      0.0595275554409318,
+      0.05137540546603223
+    ],
+    "val_acc": [
+      0.9129316678912565,
+      0.9360764144011756,
+      0.970242468772961,
+      0.9665686994856723,
+      0.9507714915503307,
+      0.97060984570169,
+      0.9827332843497428,
+      0.9812637766348273,
+      0.9838354151359294,
+      0.9860396767083027
+    ],
+    "epoch_seconds": [
+      83.11255383491516,
+      82.47831916809082,
+      82.29399609565735,
+      82.33759689331055,
+      82.35210108757019,
+      82.32011914253235,
+      82.58074998855591,
+      83.0126850605011,
+      82.45134210586548,
+      82.32923913002014
+    ]
+  }
+}

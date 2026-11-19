@@ -1,0 +1,22 @@
+.venv/
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.pytest_cache/
+.DS_Store
+.env
+
+# dataset and local artifacts (never commit); trained weights are included
+data/raw/*
+data/processed/*
+models/checkpoints/*
+!models/checkpoints/baseline.pt
+!models/checkpoints/augmented.pt
+uploads/*
+*.db
+*.pth
+
+# local config copy (config.example.yaml is tracked)
+config/config.yaml
+
+!.gitkeep

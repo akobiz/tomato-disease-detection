@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<!-- © 2026 Андрій Кобізь -->
+<html lang="uk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Виявлення хвороб томатів за зображенням листка</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <main>
+    <h1>Виявлення хвороб томатів за зображенням листка</h1>
+    <p class="note">Дослідницький прототип (магістерська робота). Не замінює діагностику агронома.</p>
+
+    <section class="card">
+      <h2>Аналіз зображення</h2>
+      <div id="dropzone" class="dropzone">
+        <p>Перетягніть фото сюди або оберіть:</p>
+        <div class="buttons">
+          <label class="btn">Вибрати фото
+            <input type="file" id="file-input" accept="image/*" hidden>
+          </label>
+          <label class="btn">Зробити фото
+            <input type="file" id="camera-input" accept="image/*" capture="environment" hidden>
+          </label>
+        </div>
+        <p class="hint">JPEG або PNG, до 10 МБ. Великі фото автоматично стискаються до 1024 px.</p>
+      </div>
+
+      <div id="preview-box" class="hidden">
+        <img id="preview" alt="Попередній перегляд">
+      </div>
+      <button id="analyze-btn" class="btn primary" disabled>Проаналізувати</button>
+      <span id="loading" class="hidden">Аналіз…</span>
+      <p id="error" class="error hidden"></p>
+
+      <div id="result" class="hidden">
+        <h3>Результат</h3>
+        <p class="main-result">
+          <span id="result-class"></span>
+          <span id="result-confidence" class="confidence"></span>
+        </p>
+        <p id="result-en" class="hint"></p>
+        <p id="low-conf" class="warning hidden"></p>
+        <h4>Топ-3 передбачення</h4>
+        <ul id="top-list"></ul>
+
+        <h4>Що вплинуло на рішення (Grad-CAM)</h4>
+        <div class="pair">
+          <figure><img id="orig-img" alt="Оригінал"><figcaption>Оригінал</figcaption></figure>
+          <figure>
+            <img id="gradcam-img" alt="Grad-CAM" class="hidden">
+            <span id="gradcam-wait" class="hint">Будуємо карту…</span>
+            <figcaption>Grad-CAM</figcaption>
+          </figure>
+        </div>
+        <p class="hint">Червоним позначено ділянки, що найбільше вплинули на рішення моделі. Карта груба й не вказує точні межі ураження. Якщо червоним підсвічено тло або інші листки, модель могла спиратися на них, а не на ураження: така відповідь менш надійна (модель навчено на фото з однорідним тлом).</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="row">
+        <h2>Історія аналізів</h2>
+        <a href="/predictions.csv" class="link" download>Експорт CSV</a>
+      </div>
+      <div class="table-wrap">
+        <table id="history">
+          <thead>
+            <tr><th>Дата</th><th>Зображення</th><th>Передбачення</th><th>Впевненість</th><th></th></tr>
+          </thead>
+          <tbody id="history-body"></tbody>
+        </table>
+      </div>
+      <p id="history-empty" class="hint hidden">Історія порожня.</p>
+    </section>
+    <footer class="copyright">© 2026 Андрій Кобізь</footer>
+  </main>
+  <script src="/static/app.js"></script>
+</body>
+</html>

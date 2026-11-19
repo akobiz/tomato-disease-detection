@@ -1,0 +1,34 @@
+# Copy to config/config.yaml and edit locally.
+seed: 42
+
+data:
+  dataset_path: data/raw/PlantVillage   # one sub-folder per class
+  class_prefix: "Tomato___"             # only class folders starting with this are used
+  split_file: data/processed/split.json
+  processed_path: data/processed
+  train_frac: 0.70
+  val_frac: 0.15
+  test_frac: 0.15
+  image_size: 224
+  num_classes: null                     # derived from the dataset folders (len(classes))
+  augmentation: false                   # false = baseline, true = experiment 2
+
+model:
+  name: resnet18
+  pretrained: true
+  checkpoint_path: models/checkpoints/baseline.pt   # model used by the API/Predictor
+
+train:
+  batch_size: 32
+  learning_rate: 0.001
+  epochs: 10
+  optimizer: adam                       # adam | adamw
+  num_workers: 2
+
+device: auto                            # auto = CUDA -> MPS -> CPU
+
+api:
+  max_upload_mb: 10
+  top_k: 3
+  db_path: data/predictions.db         # SQLite prediction history (git-ignored)
+  uploads_dir: uploads                  # saved uploaded images (git-ignored)
